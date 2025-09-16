@@ -1,0 +1,23 @@
+%{
+int commentLines = 0;
+int inBlockComment = 0;
+%}
+
+%%
+
+"/*"            { inBlockComment = 1; commentLines++; }
+"*/"            { inBlockComment = 0; }
+"//".*          { commentLines++; }
+\n              { if(inBlockComment) commentLines++; }
+.               { /* ignore other characters */ }
+
+%%
+
+int yywrap(void) {}
+
+int main() {
+    printf("\nEnter the input text:\n");
+    yylex();
+    printf("\nComment Lines: %d\n", commentLines);
+    return 0;
+}

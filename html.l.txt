@@ -1,0 +1,23 @@
+%{
+#include <stdio.h>
+int html_count = 0;
+%}
+
+%%
+"<"[^>]+">"    { 
+                   html_count++; 
+                   printf("Tag %d: %s\n", html_count, yytext); 
+               }
+.|\n           ;   /* ignore other characters */
+%%
+
+int yywrap() {
+    return 1;
+}
+
+int main() {
+    printf("Enter HTML content:\n");
+    yylex();
+    printf("\nTotal HTML Tags: %d\n", html_count);
+    return 0;
+}

@@ -1,0 +1,14 @@
+%{
+%}
+
+%%
+
+[0-9]+(\.[0-9]) {printf("its valid");}
+.+ {printf("its in valid");}
+%%
+int yywrap(){}
+int main ()
+{
+printf("enter the number:");
+yylex();
+}

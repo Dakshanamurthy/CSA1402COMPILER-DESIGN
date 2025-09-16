@@ -1,0 +1,54 @@
+
+1:#include <stdio.h>
+
+2:#include <ctype.h>
+
+
+3:int main() {
+
+4:    char c;
+
+5:    int characters = 0, words = 0, lines = 0;
+
+6:    int inWord = 0;
+
+
+7:    printf("Enter text (Ctrl+D to end):\n");
+
+
+8:    while ((c = getchar()) != EOF) {
+
+9:        characters++;
+
+
+10:        if (c == '\n')
+
+11:            lines++;
+
+
+12:        if (isspace(c))
+
+13:            inWord = 0;
+
+14:        else if (!inWord) {
+
+15:            inWord = 1;
+
+16:            words++;
+
+17:        }
+
+18:    }
+
+
+19:    printf("Characters: %d\n", characters);
+
+20:    printf("Words: %d\n", words);
+
+21:    printf("Lines: %d\n", lines);
+
+
+22:    return 0;
+
+23:}
+

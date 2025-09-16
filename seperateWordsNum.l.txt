@@ -1,0 +1,32 @@
+%{
+#include <stdio.h>
+#include <string.h>
+
+char words[1000][50];   // store words
+char numbers[1000][50]; // store numbers
+int wcount = 0, ncount = 0;
+%}
+
+%%
+[0-9]+      { strcpy(numbers[ncount++], yytext); }
+[a-zA-Z]+   { strcpy(words[wcount++], yytext); }
+[ \t\n]+    ;   // ignore spaces, tabs, newlines
+.           ;   // ignore other characters
+%%
+
+int yywrap() { return 1; }
+
+int main() {
+    printf("Enter input:\n");
+    yylex();
+
+    printf("\nWords List:\n");
+    for(int i = 0; i < wcount; i++)
+        printf("%s\n", words[i]);
+
+    printf("\nNumbers List:\n");
+    for(int i = 0; i < ncount; i++)
+        printf("%s\n", numbers[i]);
+
+    return 0;
+}
